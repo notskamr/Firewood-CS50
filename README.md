@@ -128,7 +128,7 @@ socket.on('user-connected', (userId, username) => {
 ```
 
 Now, lets say that there is already a user in the meeting, waiting for us. Then what will happen is that whenever we join, that user will receive our 'user-connected' event and then call/connect to us as above.
-And then we will respond with our stream, and the other user will send us our stream.
+And then we will respond with our stream, and the other user will send us their own stream.
 
 ```javascript
 // Whenever we are called - by a user already in the room: run this code.
