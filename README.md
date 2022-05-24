@@ -9,7 +9,7 @@
 The project is essentially a very minimal and easy-to-use video calling website,
 wherein users can create cabins and invite other users to them.
 
-The site has a vareity of error correction methods and quality-of-life features such as:
+The site has a variety of error correction methods and quality-of-life features such as:
 - Password validation
 - User validation
 - Cookie validation
