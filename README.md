@@ -7,7 +7,7 @@
 ## Description
 
 The project is essentially a very minimal and easy-to-use video calling website,
-wherein users can create 'Cabin's and invite other users to them.
+wherein users can create cabins and invite other users to them.
 
 The site has a vareity of error correction methods and quality-of-life features such as:
 - Password validation
@@ -16,7 +16,7 @@ The site has a vareity of error correction methods and quality-of-life features 
 - Reset password (Forgot password)
 
 ### The Basic Premise
-Users simply sign up for an account with a Username, E-mail, and a Password, and can create
+Users sign up for an account with a Username, E-mail, and a Password, and can create
 new cabins.
 
 The cabin pages require you to be logged in to access them and will redirect you back to the '/' route if you are not logged in.
@@ -62,7 +62,7 @@ Each user has the following fields:
 The fields of *Friends* and *Enemies* are unused at the moment, but the ability to add and remove friends can be added later.
 
 #### How video calling works:
-All communication between users is P2P - and the server doesn't do anything other than managing the connections and disconnections of users.
+All communication between users is P2P - and the server doesn't do anything other than manage the connections and disconnections of users.
 
 The way it works is that, when you make a new cabin, a random UUID is generated and you are redirected to a *Cabin* route with that URL.
 ```javascript
@@ -99,11 +99,11 @@ constructedLocalVideo.appendGrid(`${videoGrid}${gridNumber}`)
 
 After this is all done, the client-side emits the fact that we have joined the cabin (a 'join-cabin' event), with a specific address, to the server side socket (Socket.IO), along with our details.
 ```javascript
-// Emitting that we (the current user, which is us on the client side) have joint this specific cabin; and here are our details (id, username)
+// Emitting that we (the current user, which is us on the client side) have joined this specific cabin; and here are our details (id, username)
 socket.emit('join-cabin', CABIN_ADDRESS, USER_ID, USERNAME)
 ```
 
-Then the server receives this event and joins the cabin, and then emits the fact that 'we', the new user, have connected to this exact cabin, so that other users in the cabin already know that we have connected. It also sends our users id and username along with it.
+Whenever the server receives this event, it will join the cabin (read more [here](https://socket.io/docs/v3/rooms/)), and then emits the fact that 'we', the new user, have connected to the cabin with the address we emitted. Thus, if there are any users already in the cabin, they will receive our 'user-connected' event aswell as our details (our username and ID). It will also log the connection.
 ```javascript
 // Joining the room (cabin)
 socket.join(cabinAddress)
@@ -113,7 +113,7 @@ socket.to(cabinAddress).emit('user-connected', userId, username)
 console.log(`${username} (${userId}) connected to '${cabinAddress}'`)
 ```
 
-When a new user connects to the room - after having gone through the same process we did above - we call up the new user, using PeerJS.
+When a new user connects to the room - after going through the same process we did above - we call the new user, using PeerJS.
 - The *connectToNewUser* function calls up the user, and asks the user for their stream, and constructs a video element once it receives it. It also sends the user our own stream.
 ```javascript
 // Whenever a new user connects, the code inside is run - the serve also passes through to us the username and id of the new user who connected.
@@ -127,8 +127,8 @@ socket.on('user-connected', (userId, username) => {
 })
 ```
 
-Now, lets say that there is already a user in the meeting, waiting for us. Then what will happen is that whenever we join, that user will receive our 'user-connected' event and then call/connect to us as above.
-And then we will respond with our stream, and the other user will send us their own stream.
+Now, let's say that there's already a user in a cabin who is waiting for us to join. In that case, whenever we join their cabin and emit our own 'join-cabin' event, the user waiting for us will receive our 'user-connected' event and then try to call/connect to us as above (in the previous step).
+And then, we will respond with our stream, and the other user will send us their own stream.
 
 ```javascript
 // Whenever we are called - by a user already in the room: run this code.
@@ -149,10 +149,10 @@ peer.on('call', call => {
     })
 ```
 
-#### And thats pretty much it!
+#### And that's pretty much it!
 
 ## Final Thoughts
-This project was **insanely** fun to do. There were many times when I got stuck for hours on end, or the code was functioning but was buggy - and the feeling is amazing when you finally fix something that has been driving you crazy for so long! Anyways, I hope this project brings to life everything that I've learnt. Goodbye, world!
+This project was **insanely** fun to do. There were many times when I got stuck for hours on end, or the code was functioning but was buggy - and the feeling is fantastic when you finally fix something that has been driving you crazy for so long! Anyways, I hope this project brings to life everything that I've learned. Goodbye, world!
 
 ## Acknowledgements
 
