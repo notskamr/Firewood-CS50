@@ -160,7 +160,7 @@ This project was **insanely** fun to do. There were many times when I got stuck 
  - [Express.js](https://expressjs.com/)
  - [EJS](https://ejs.co/)
  - [MongoDB](https://www.mongodb.com/)
- - [Heroku](https://dashboard.heroku.com/)
+ - [Railway](https://railway.app/)
  - [Nodemailer](https://nodemailer.com/)
  - [PeerJS](https://peerjs.com/)
  - [Socket.IO](https://socket.io/)
