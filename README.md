@@ -29,7 +29,7 @@ The cabin pages require you to be logged in to access them and will redirect you
 - [EJS](https://ejs.co/) is used as the templating engine.
 - [Nodemailer](https://nodemailer.com/) is used for sending mails.
 *Other outside packages are also used and are mentioned [here](#acknowledgements) along with the packages above*
-##### *Note: Due to the death of Heroku's free tier - Firewood now uses Railway[https://railway.app/] for the server - the video demo is outdated in this way.*
+##### *Note: Due to the death of Heroku's free tier - Firewood now uses [Railway](https://railway.app/) for the server - the video demo is outdated in this way.*
 The site makes use of the above in tandem for the general functionality and usability of the site; and
 for other quality-of-life features.
 
